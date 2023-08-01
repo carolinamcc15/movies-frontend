@@ -1,7 +1,9 @@
+import { DatePicker, notification } from 'antd';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import React, { useState } from 'react';
-import { DatePicker } from 'antd';
+
+import { createMovie } from '../api/Api';
 
 const FormContainer = styled.form`
   max-width: 400px;
@@ -39,19 +41,32 @@ const MovieForm = () => {
   } = useForm();
 
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotification = (message, type = 'info') => {
+    api[type]({
+      message,
+      placement: 'top',
+    });
+  };
 
   const onChange = (date, dateStr) => {
     setSelectedDate(dateStr);
   };
 
-  const onSubmit = data => {
-    if (selectedDate) {
-      console.log({ ...data, date: selectedDate });
+  const onSubmit = async data => {
+    try {
+      const reqBody = { ...data, date: selectedDate };
+      await createMovie(reqBody);
+      openNotification('La película fue guardada correctamente', 'success');
+    } catch (e) {
+      openNotification('La película no pudo ser guardada', 'error');
     }
   };
 
   return (
     <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      {contextHolder}
       <FormField>
         <Label>Nombre *</Label>
         <Input
@@ -91,7 +106,7 @@ const MovieForm = () => {
         />
         {errors.budget && <p>{errors.budget.message}</p>}
       </FormField>
-      <Button onClick={onSubmit}>Guardar</Button>
+      <Button>Guardar</Button>
     </FormContainer>
   );
 };
