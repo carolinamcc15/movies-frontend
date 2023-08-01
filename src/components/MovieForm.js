@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import React from 'react';
+import React, { useState } from 'react';
+import { DatePicker } from 'antd';
 
 const FormContainer = styled.form`
   max-width: 400px;
@@ -37,9 +38,16 @@ const MovieForm = () => {
     formState: { errors },
   } = useForm();
 
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const onChange = (date, dateStr) => {
+    setSelectedDate(dateStr);
+  };
+
   const onSubmit = data => {
-    // Handle form submission with validated data
-    console.log(data);
+    if (selectedDate) {
+      console.log({ ...data, date: selectedDate });
+    }
   };
 
   return (
@@ -58,7 +66,7 @@ const MovieForm = () => {
       </FormField>
       <FormField>
         <Label>Fecha de estreno *</Label>
-        <Input type='date' {...register('date', { required: 'La fecha es requerida' })} />
+        <DatePicker onChange={onChange} showToday={false} format='DD/MM/YYYY' />
         {errors.date && <p>{errors.date.message}</p>}
       </FormField>
       <FormField>
