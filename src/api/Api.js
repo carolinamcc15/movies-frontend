@@ -1,6 +1,6 @@
 const API_ENDPOINT_MOVIES = "http://localhost:3010/api/movies";
 
-export const handleSubmit = async (formData) => {
+export const createMovie = async (formData) => {
     try {
         const parsedFormData = {
             ...formData,
