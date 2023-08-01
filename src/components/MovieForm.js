@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { handleSubmit } from "../api/Api";
+import { useForm } from 'react-hook-form';
+import styled from 'styled-components';
+import React from 'react';
 
-const FormWrapper = styled.div`
+const FormContainer = styled.form`
   max-width: 400px;
   margin: 0 auto;
 `;
@@ -31,67 +31,61 @@ const Button = styled.button`
 `;
 
 const MovieForm = () => {
-    const [formData, setFormData] = useState({
-        name: "",
-        date: "",
-        duration: "",
-        budget: ""
-    });
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+  const onSubmit = data => {
+    // Handle form submission with validated data
+    console.log(data);
+  };
 
-    const handleFormSubmit = async () => {
-        try {
-            await handleSubmit(formData);
-        } catch (error) {
-            console.error("Error submitting data:", error);
-        }
-    };
-
-    return (
-        <FormWrapper>
-            <FormField>
-                <Label>Nombre:</Label>
-                <Input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                />
-            </FormField>
-            <FormField>
-                <Label>Fecha de estreno:</Label>
-                <Input
-                    type="text"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                />
-            </FormField>
-            <FormField>
-                <Label>Duración (minutos):</Label>
-                <Input
-                    type="number"
-                    name="duration"
-                    value={formData.duration}
-                    onChange={handleChange}
-                />
-            </FormField>
-            <FormField>
-                <Label>Presupuesto:</Label>
-                <Input
-                    type="number"
-                    name="budget"
-                    value={formData.budget}
-                    onChange={handleChange}
-                />
-            </FormField>
-            <Button onClick={handleFormSubmit}>Guardar</Button>
-        </FormWrapper>
-    );
+  return (
+    <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      <FormField>
+        <Label>Nombre *</Label>
+        <Input
+          type='text'
+          name='name'
+          {...register('name', {
+            required: 'El nombre es requerido',
+            maxLength: { value: 255, message: 'Has sobrepasado el máximo de 255 caracteres' },
+          })}
+        />
+        {errors.name && <p>{errors.name.message}</p>}
+      </FormField>
+      <FormField>
+        <Label>Fecha de estreno *</Label>
+        <Input type='date' {...register('date', { required: 'La fecha es requerida' })} />
+        {errors.date && <p>{errors.date.message}</p>}
+      </FormField>
+      <FormField>
+        <Label>Duración (minutos) *:</Label>
+        <Input
+          type='number'
+          {...register('duration', {
+            required: 'La duración es requerida',
+            pattern: { value: /^\d+$/, message: 'La duración debe ser un número entero' },
+          })}
+        />
+        {errors.duration && <p>{errors.duration.message}</p>}
+      </FormField>
+      <FormField>
+        <Label>Presupuesto *</Label>
+        <Input
+          type='number'
+          step='0.01'
+          {...register('budget', {
+            required: 'El presupuesto es requerido',
+          })}
+        />
+        {errors.budget && <p>{errors.budget.message}</p>}
+      </FormField>
+      <Button onClick={onSubmit}>Guardar</Button>
+    </FormContainer>
+  );
 };
 
 export default MovieForm;
