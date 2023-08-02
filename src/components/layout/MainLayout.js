@@ -1,23 +1,27 @@
+import { useNavigate } from 'react-router-dom';
 import { Layout, Menu } from 'antd';
 import React from 'react';
 
-import { sidebarOptions, siteRoutes } from '../../constants/constants';
+import { useOptionsContext } from '../../context/Options';
+import { siteRoutes } from '../../constants/constants';
 import { getOptionIcon } from '../../utils/utils';
-import { useNavigate } from 'react-router-dom';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 export const MainLayout = ({ children }) => {
+  const { options } = useOptionsContext();
+
   const navigate = useNavigate();
 
-  const menuItems = sidebarOptions
+  const menuItems = options
     // Logic to remove Rent a movie option
-    .filter(option => option.route !== siteRoutes.RENT_MOVIE)
+    .filter(option => option.path !== siteRoutes.RENT_MOVIE)
     .map(option => {
       return {
-        key: option.route,
+        key: option.path,
         label: option.name,
-        icon: getOptionIcon(option.route),
+        disabled: option.disabled,
+        icon: getOptionIcon(option.path),
       };
     });
 

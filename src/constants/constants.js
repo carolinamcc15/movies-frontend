@@ -1,10 +1,10 @@
 export const siteRoutes = {
-    HOME: '/',
-    MOVIES: '/movies',
-    FORM: '/formulario',
-    RENT_MOVIE: '/rentar-pelicula',
-    MANAGE_OPTIONS: '/administrar-opciones',
-  };
+  HOME: '/',
+  MOVIES: '/movies',
+  FORM: '/formulario',
+  RENT_MOVIE: '/rentar-pelicula',
+  MANAGE_OPTIONS: '/administrar-opciones',
+};
 
 export const sidebarOptions = [
   {

@@ -1,9 +1,9 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import { getOptions } from '../api/Api';
 
 const OptionsContext = createContext();
 
-const OptionsProvider = ({ children }) => {
+export const OptionsProvider = ({ children }) => {
   const [options, setOptions] = useState([]);
 
   const fetchOptionsFromAPI = async () => {
@@ -27,4 +27,4 @@ const OptionsProvider = ({ children }) => {
   return <OptionsContext.Provider value={contextValue}>{children}</OptionsContext.Provider>;
 };
 
-export { OptionsContext, OptionsProvider };
+export const useOptionsContext = () => useContext(OptionsContext);
