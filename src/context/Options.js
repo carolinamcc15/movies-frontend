@@ -1,15 +1,18 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+
+import { siteRoutes } from '../constants/constants';
 import { getOptions } from '../api/Api';
 
 const OptionsContext = createContext();
 
-const OptionsProvider = ({ children }) => {
+export const OptionsProvider = ({ children }) => {
   const [options, setOptions] = useState([]);
 
   const fetchOptionsFromAPI = async () => {
     try {
       const optionsData = await getOptions();
-      setOptions(optionsData);
+      // Logic to remove Rent a movie option
+      setOptions(optionsData.filter(option => option.path !== siteRoutes.RENT_MOVIE));
     } catch (error) {
       console.error('Error fetching options from API:', error);
     }
@@ -27,4 +30,4 @@ const OptionsProvider = ({ children }) => {
   return <OptionsContext.Provider value={contextValue}>{children}</OptionsContext.Provider>;
 };
 
-export { OptionsContext, OptionsProvider };
+export const useOptionsContext = () => useContext(OptionsContext);
