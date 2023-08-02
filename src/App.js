@@ -1,11 +1,17 @@
+import { BrowserRouter } from 'react-router-dom';
+
+import { OptionsProvider } from './context/Options';
+import Routes from './components/routes/Routes';
 import './App.css';
-import MovieForm from "./components/MovieForm";
 
 function App() {
   return (
     <div>
-      <h1 className='header'>Películas</h1>
-      <MovieForm />
+      <BrowserRouter>
+        <OptionsProvider>
+          <Routes />
+        </OptionsProvider>
+      </BrowserRouter>
     </div>
   );
 }
