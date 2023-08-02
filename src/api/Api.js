@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getQueryParamsString } from '../utils/utils';
 
 const API_ENDPOINT_MOVIES = 'http://localhost:3010/api/movies';
 const API_ENDPOINT_OPTIONS = 'http://localhost:3010/api/options';
@@ -26,9 +27,9 @@ const createMovie = async formData => {
   }
 };
 
-const getMovies = async () => {
+const getMovies = async params => {
   try {
-    const response = await axios.get(API_ENDPOINT_MOVIES);
+    const response = await axios.get(`${API_ENDPOINT_MOVIES}${getQueryParamsString(params)}`);
     return response.data;
   } catch (error) {
     throw error;
