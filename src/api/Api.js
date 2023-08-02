@@ -45,4 +45,13 @@ const getOptions = async () => {
   }
 };
 
-export { getMovies, createMovie, getOptions };
+const toggleOptionDisabled = async optionId => {
+  try {
+    const response = await axios.put(`${API_ENDPOINT_OPTIONS}/${optionId}/toggleDisabled`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { getMovies, createMovie, getOptions, toggleOptionDisabled };
