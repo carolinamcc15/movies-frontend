@@ -30,8 +30,22 @@ export const formatNumberWithCommas = number => {
 };
 
 export const formatDate = date => {
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+  if (date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+  return date;
+};
+
+export const getQueryParamsString = queryParams => {
+  const params = new URLSearchParams();
+
+  for (const [key, value] of Object.entries(queryParams)) {
+    params.append(key, value);
+  }
+
+  const queryString = params.toString();
+  return queryString ? `?${queryString}` : '';
 };
