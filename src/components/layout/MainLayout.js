@@ -3,7 +3,6 @@ import { Layout, Menu } from 'antd';
 import React from 'react';
 
 import { useOptionsContext } from '../../context/Options';
-import { siteRoutes } from '../../constants/constants';
 import { getOptionIcon } from '../../utils/utils';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -14,8 +13,8 @@ export const MainLayout = ({ children }) => {
   const navigate = useNavigate();
 
   const menuItems = options
-    // Logic to remove Rent a movie option
-    .filter(option => option.path !== siteRoutes.RENT_MOVIE)
+    // Filter disabled options to not show them in the menu
+    .filter(option => !option.disabled)
     .map(option => {
       return {
         key: option.path,
