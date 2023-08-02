@@ -1,8 +1,11 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { handleSubmit } from "../api/Api";
+import { DatePicker, notification } from 'antd';
+import { useForm } from 'react-hook-form';
+import styled from 'styled-components';
+import React, { useState } from 'react';
 
-const FormWrapper = styled.div`
+import { createMovie } from '../api/Api';
+
+const FormContainer = styled.form`
   max-width: 400px;
   margin: 0 auto;
 `;
@@ -31,67 +34,81 @@ const Button = styled.button`
 `;
 
 const MovieForm = () => {
-    const [formData, setFormData] = useState({
-        name: "",
-        date: "",
-        duration: "",
-        budget: ""
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotification = (message, type = 'info') => {
+    api[type]({
+      message,
+      placement: 'top',
     });
+  };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
+  const onChange = (date, dateStr) => {
+    setSelectedDate(dateStr);
+  };
 
-    const handleFormSubmit = async () => {
-        try {
-            await handleSubmit(formData);
-        } catch (error) {
-            console.error("Error submitting data:", error);
-        }
-    };
+  const onSubmit = async data => {
+    try {
+      const reqBody = { ...data, date: selectedDate };
+      await createMovie(reqBody);
+      openNotification('La película fue guardada correctamente', 'success');
+    } catch (e) {
+      openNotification('La película no pudo ser guardada', 'error');
+    }
+  };
 
-    return (
-        <FormWrapper>
-            <FormField>
-                <Label>Nombre:</Label>
-                <Input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                />
-            </FormField>
-            <FormField>
-                <Label>Fecha de estreno:</Label>
-                <Input
-                    type="text"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleChange}
-                />
-            </FormField>
-            <FormField>
-                <Label>Duración (minutos):</Label>
-                <Input
-                    type="number"
-                    name="duration"
-                    value={formData.duration}
-                    onChange={handleChange}
-                />
-            </FormField>
-            <FormField>
-                <Label>Presupuesto:</Label>
-                <Input
-                    type="number"
-                    name="budget"
-                    value={formData.budget}
-                    onChange={handleChange}
-                />
-            </FormField>
-            <Button onClick={handleFormSubmit}>Guardar</Button>
-        </FormWrapper>
-    );
+  return (
+    <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      {contextHolder}
+      <FormField>
+        <Label>Nombre *</Label>
+        <Input
+          type='text'
+          name='name'
+          {...register('name', {
+            required: 'El nombre es requerido',
+            maxLength: { value: 255, message: 'Has sobrepasado el máximo de 255 caracteres' },
+          })}
+        />
+        {errors.name && <p>{errors.name.message}</p>}
+      </FormField>
+      <FormField>
+        <Label>Fecha de estreno *</Label>
+        <DatePicker onChange={onChange} showToday={false} format='DD/MM/YYYY' />
+        {errors.date && <p>{errors.date.message}</p>}
+      </FormField>
+      <FormField>
+        <Label>Duración (minutos) *:</Label>
+        <Input
+          type='number'
+          {...register('duration', {
+            required: 'La duración es requerida',
+            pattern: { value: /^\d+$/, message: 'La duración debe ser un número entero' },
+          })}
+        />
+        {errors.duration && <p>{errors.duration.message}</p>}
+      </FormField>
+      <FormField>
+        <Label>Presupuesto *</Label>
+        <Input
+          type='number'
+          step='0.01'
+          {...register('budget', {
+            required: 'El presupuesto es requerido',
+          })}
+        />
+        {errors.budget && <p>{errors.budget.message}</p>}
+      </FormField>
+      <Button>Guardar</Button>
+    </FormContainer>
+  );
 };
 
 export default MovieForm;

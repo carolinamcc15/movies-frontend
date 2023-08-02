@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_ENDPOINT_MOVIES = 'http://localhost:3010/api/movies';
 const API_ENDPOINT_OPTIONS = 'http://localhost:3010/api/options';
 
-const handleSubmit = async formData => {
+const createMovie = async formData => {
   try {
     const parsedFormData = {
       ...formData,
@@ -35,4 +35,4 @@ const getOptions = async () => {
   }
 };
 
-export { handleSubmit, getOptions };
+export { createMovie, getOptions };
