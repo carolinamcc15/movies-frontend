@@ -126,7 +126,7 @@ const MovieForm = () => {
         disabled={isButtonDisabled}
         className='px-6 py-2 bg-sky-500 font-semibold text-sm tracking-wider whitespace-nowrap text-white uppercase rounded-md border-2 border-transparent cursor-pointer hover:bg-primary-700 transform enabled:hover:scale-[1.01] disabled:hover:scale-1 transition duration-300 ease-in-out hover:opacity-80 disabled:opacity-30 disabled:cursor-not-allowed'
       >
-        Enviar
+        Crear
       </button>
     </form>
   );
