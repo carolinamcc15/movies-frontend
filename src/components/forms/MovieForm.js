@@ -2,8 +2,8 @@ import { DatePicker, notification } from 'antd';
 import { useForm } from 'react-hook-form';
 import React, { useState } from 'react';
 
-import { createMovie } from '../api/Api';
-import Input from './inputs/Input';
+import { createMovie } from '../../api/Api';
+import Input from '../inputs/Input';
 
 const MovieForm = () => {
   const {

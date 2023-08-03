@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import MovieForm from '../components/MovieForm';
+import MovieForm from '../components/forms/MovieForm';
 
 export const MoviesFormPage = () => {
   return (
