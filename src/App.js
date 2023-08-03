@@ -1,12 +1,27 @@
-import './App.css';
-import MovieForm from "./components/MovieForm";
+import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+
+import { OptionsProvider } from './context/Options';
+import Routes from './components/routes/Routes';
+import { ConfigProvider } from 'antd';
 
 function App() {
   return (
-    <div>
-      <h1 className='header'>Películas</h1>
-      <MovieForm />
-    </div>
+    <BrowserRouter>
+      <HelmetProvider>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: '#0ea5e9',
+            },
+          }}
+        >
+          <OptionsProvider>
+            <Routes />
+          </OptionsProvider>
+        </ConfigProvider>
+      </HelmetProvider>
+    </BrowserRouter>
   );
 }
 

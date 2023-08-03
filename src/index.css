@@ -1,13 +1,27 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ant-notification-notice-message{
+    font-size: 14px !important;
+    font-weight: 500;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+th.ant-table-cell {
+    background: #0995d6 !important;
+    color: #fff !important;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+::-webkit-scrollbar-thumb {
+    background-color: #92d3f1;
+    border-radius: 16px;
+    border: 3px solid #a3dbf4;
+  }
