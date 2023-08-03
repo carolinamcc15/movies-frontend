@@ -6,6 +6,7 @@ import { MoviesListPage } from '../../pages/MoviesList';
 import { MoviesFormPage } from '../../pages/MoviesForm';
 import { siteRoutes } from '../../constants/constants';
 import { MainLayout } from '../layout/MainLayout';
+import { NotFoundPage } from '../../pages/NotFound';
 
 export const Routes = () => {
   const routes = [
@@ -13,6 +14,7 @@ export const Routes = () => {
     { path: siteRoutes.MOVIES, element: <MoviesListPage /> },
     { path: siteRoutes.FORM, element: <MoviesFormPage /> },
     { path: siteRoutes.MANAGE_OPTIONS, element: <ManageOptionsPage /> },
+    { path: '*', element: <NotFoundPage /> },
   ];
 
   const routing = useRoutes(routes);
