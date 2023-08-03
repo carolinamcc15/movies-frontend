@@ -15,7 +15,7 @@ export const OptionCard = ({ option, onToggle }) => {
 
   return (
     <article className='flex items-center bg-white shadow-md px-4 py-6 gap-4 rounded-sm'>
-      <div className='flex items-center text-3xl md:text-5xl'>{getOptionIcon(option.path)}</div>
+      <div className='flex items-center text-3xl md:text-5xl text-sky-300'>{getOptionIcon(option.path)}</div>
       <div className='w-full flex flex-col gap-1'>
         <div className='flex justify-between items-center'>
           <h2 className='text-lg font-semibold truncate'>{option.name}</h2>

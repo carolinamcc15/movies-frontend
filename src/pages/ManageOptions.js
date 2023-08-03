@@ -29,7 +29,7 @@ export const ManageOptionsPage = () => {
   };
 
   return (
-    <div className='flex flex-col gap-8'>
+    <div className='flex flex-col gap-8 md:p-4'>
       {contextHolder}
       <div className='flex flex-col gap-5'>
         <h1 className='text-2xl font-semibold '>Administrar opciones</h1>

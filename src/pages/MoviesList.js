@@ -32,10 +32,23 @@ export const MoviesListPage = () => {
   }, [filterYear]);
 
   return (
-    <div className='flex flex-col gap-10'>
+    <div className='flex flex-col gap-6 md:p-4'>
       <h1 className='text-xl lg:text-2xl font-semibold'>Listado de películas</h1>
-      <main>
-        <DatePicker onChange={onChange} picker='year' value={filterYear} />
+      <main className='flex flex-col gap-4'>
+        <div className='flex items-center gap-3 w-full flex-wrap'>
+          <label className='text-xs uppercase font-semibold text-sky-600 mb-1'>
+            Filtro por año
+          </label>
+          <div className='w-44'>
+            <DatePicker
+              onChange={onChange}
+              className='w-full'
+              picker='year'
+              placeholder='Selecciona un año'
+              value={filterYear}
+            />
+          </div>
+        </div>
         <main>{isLoading ? <p>Loading...</p> : <MoviesTable movies={movies} />}</main>
       </main>
     </div>
