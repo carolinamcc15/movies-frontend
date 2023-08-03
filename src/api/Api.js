@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { getQueryParamsString } from '../utils/utils';
 
-const API_ENDPOINT_MOVIES = 'http://localhost:3010/api/movies';
-const API_ENDPOINT_OPTIONS = 'http://localhost:3010/api/options';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3010';
+
+const API_ENDPOINT_MOVIES = `${API_URL}/api/movies`;
+const API_ENDPOINT_OPTIONS = `${API_URL}/api/options`;
 
 const createMovie = async formData => {
   try {
