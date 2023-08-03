@@ -12,7 +12,7 @@ const MovieForm = () => {
     reset,
     formState: { errors, isValid },
     watch,
-  } = useForm();
+  } = useForm({mode: "onChange"});
   const watchedFields = watch();
 
   const [api, contextHolder] = notification.useNotification();
@@ -60,7 +60,7 @@ const MovieForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className='w-full max-w-[600px] m-auto flex flex-col gap-5'
+      className='w-full max-w-[650px] m-auto flex flex-col gap-5'
     >
       {contextHolder}
       <Input
