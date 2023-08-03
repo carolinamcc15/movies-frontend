@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ant-notification-notice-message{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+th.ant-table-cell {
+    background: #0ea5e9 !important;
+    color: #fff !important;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+::-webkit-scrollbar-thumb {
+    background-color: #92d3f1;
+    border-radius: 16px;
+    border: 3px solid #a3dbf4;
+  }
