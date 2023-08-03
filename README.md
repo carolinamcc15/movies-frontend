@@ -13,6 +13,7 @@ Proyecto de prueba técnica TalleresT, realizado con ReactJS.
 ### Validaciones de formulario
 Se tomaron en cuenta las siguientes validaciones:
 - Todos los campos son requeridos.
+- El máximo de caracteres para el nombre es de 255.
 - Los campos numéricos solamente aceptan valores enteros y el mínimo es 1.
 ![image](https://github.com/carolinamcc15/movies-frontend/assets/54415092/d7fad2d4-1abb-4118-a56d-ec00099317ec)
 
