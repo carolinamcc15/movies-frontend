@@ -34,6 +34,10 @@ const paginationConfig = {
   position: ['bottomCenter'],
 };
 
+const customLocale = {
+  emptyText: 'No se encontraron datos',
+};
+
 export const MoviesTable = ({ movies }) => {
   const windowSize = useWindowSize();
 
@@ -52,6 +56,7 @@ export const MoviesTable = ({ movies }) => {
         bordered={true}
         pagination={paginationConfig}
         scroll={scrollConfig}
+        locale={customLocale}
       />
     </div>
   );
