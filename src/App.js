@@ -1,18 +1,27 @@
 import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 import { OptionsProvider } from './context/Options';
 import Routes from './components/routes/Routes';
-import './App.css';
+import { ConfigProvider } from 'antd';
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <OptionsProvider>
-          <Routes />
-        </OptionsProvider>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <HelmetProvider>
+        <ConfigProvider
+          theme={{
+            token: {
+              colorPrimary: '#0ea5e9',
+            },
+          }}
+        >
+          <OptionsProvider>
+            <Routes />
+          </OptionsProvider>
+        </ConfigProvider>
+      </HelmetProvider>
+    </BrowserRouter>
   );
 }
 
