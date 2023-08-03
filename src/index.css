@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 .ant-notification-notice-message{
-    font-size: 14px;
+    font-size: 14px !important;
     font-weight: 500;
 }
 
 th.ant-table-cell {
-    background: #0ea5e9 !important;
+    background: #0995d6 !important;
     color: #fff !important;
 }
 
