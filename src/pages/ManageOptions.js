@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { notification } from 'antd';
 
 import { useOptionsContext } from '../context/Options';
@@ -30,6 +31,9 @@ export const ManageOptionsPage = () => {
 
   return (
     <div className=' h-full flex items-center justify-center'>
+      <Helmet>
+        <title>TalleresT Test | Administrar opciones</title>
+      </Helmet>
       <div className='flex flex-col gap-8 md:p-4 w-full max-w-[800px] m-auto'>
         {contextHolder}
         <div className='flex flex-col gap-5'>

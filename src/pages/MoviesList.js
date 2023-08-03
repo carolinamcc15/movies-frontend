@@ -1,4 +1,6 @@
+
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { useEffect, useState } from 'react';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
@@ -41,6 +43,9 @@ export const MoviesListPage = () => {
 
   return (
     <div className='flex flex-col gap-6 md:p-4'>
+      <Helmet>
+        <title>TalleresT Test | Películas</title>
+      </Helmet>
       <div className='flex justify-between flex-wrap gap-5'>
         <h1 className='text-xl lg:text-2xl font-semibold'>Listado de películas</h1>
         <PrimaryButton text='Agregar película' onClickHandler={navigateToForm} />

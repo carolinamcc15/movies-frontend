@@ -1,4 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 import { OptionsProvider } from './context/Options';
 import Routes from './components/routes/Routes';
@@ -6,8 +7,8 @@ import { ConfigProvider } from 'antd';
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
+    <BrowserRouter>
+      <HelmetProvider>
         <ConfigProvider
           theme={{
             token: {
@@ -15,12 +16,12 @@ function App() {
             },
           }}
         >
-        <OptionsProvider>
-          <Routes />
-        </OptionsProvider>
-        </ConfigProvider >
-      </BrowserRouter>
-    </div>
+          <OptionsProvider>
+            <Routes />
+          </OptionsProvider>
+        </ConfigProvider>
+      </HelmetProvider>
+    </BrowserRouter>
   );
 }
 
