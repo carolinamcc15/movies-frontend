@@ -46,6 +46,11 @@ export const MainLayout = ({ children }) => {
           items={menuItems}
           onClick={onClick}
           selectedKeys={activeMenuItem}
+          style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 1,
+          }}
         />
       </Sider>
       <Layout>
@@ -67,7 +72,11 @@ export const MainLayout = ({ children }) => {
           </div>
         </Header>
         <Content style={{ margin: '16px' }}>{children}</Content>
-        <Footer style={{ textAlign: 'center' }}>By Carolina Carranza</Footer>
+        <Footer className='bg-sky-100 text-center text-sky-700 '>
+          <p className='flex flex-col text-sm'>
+            Made by Carolina Carranza<span className='font-light'>2023</span>
+          </p>
+        </Footer>
       </Layout>
     </Layout>
   );
