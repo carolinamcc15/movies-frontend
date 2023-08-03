@@ -84,7 +84,7 @@ const MovieForm = () => {
           placeholder='200000000'
           register={{
             ...register('budget', {
-              min: 1,
+              min: { value: 1, message: 'El mínimo es 1' },
               required: 'El presupuesto es requerido',
               pattern: { value: /^\d+$/, message: 'La duración debe ser un número entero' },
             }),
@@ -98,7 +98,7 @@ const MovieForm = () => {
           placeholder='120'
           register={{
             ...register('duration', {
-              min: 1,
+              min: { value: 1, message: 'El mínimo es 1' },
               required: 'La duración es requerida',
               pattern: { value: /^\d+$/, message: 'La duración debe ser un número entero' },
             }),
